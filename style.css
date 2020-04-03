@@ -97,3 +97,9 @@ body {
 .arrow {
   font-size: 10px;
 }
+
+.pressed {
+  background: linear-gradient(#878686, #505050);
+  transform: translate(1px, 1px);
+  transition: all 0.2s ease 0s;
+}

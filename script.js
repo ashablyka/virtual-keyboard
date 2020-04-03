@@ -131,6 +131,15 @@ class Keyboard {
 
     this.elements.wrapper.append(this.elements.textarea, this.elements.keyboard);
     document.body.append(this.elements.wrapper);
+
+    document.addEventListener('keydown', this.onKeyDown);
+    document.addEventListener('keyup', this.onKeyUp);
+  }
+
+  fillButtonsNames(lang) {
+    this.elements.keys.forEach((key, index) => {
+      key.textContent = buttons[index][lang];
+    });
   }
 
   changeLanguage() {
@@ -139,10 +148,18 @@ class Keyboard {
     this.fillButtonsNames(this.lang);
   }
 
-  fillButtonsNames(lang) {
-    for (let i = 0; i < this.elements.keys.length; i += 1) {
-      this.elements.keys[i].textContent = buttons[i][lang];
-    }
+  onKeyDown = (event) => {
+    const index = buttons.findIndex((button) => button.code === event.code);
+    const buttonPressed = this.elements.keys[index];
+
+    buttonPressed.classList.add('pressed');
+  }
+
+  onKeyUp = (event) => {
+    const index = buttons.findIndex((button) => button.code === event.code);
+    const buttonPressed = this.elements.keys[index];
+
+    buttonPressed.classList.remove('pressed');
   }
 }
 
