@@ -64,22 +64,28 @@ const buttons = [
   { code: 'ArrowDown', en: '▼', ru: '▼', printable: false },
   { code: 'ArrowRight', en: '►', ru: '►', printable: false },
   { code: 'ControlRight', en: 'Ctrl', ru: 'Ctrl', printable: false },
-
 ];
 class Keyboard {
-  constructor() {
-    this.lang = 'en';
+  elements = {
+    wrapper: null,
+    textarea: null,
+    keyboard: null,
+    keys: [],
   }
 
-  init() {
-    const wrapper = createElement('div', 'wrapper');
-    const textarea = createElement('textarea', 'textarea');
-    const keyboard = createElement('div', 'keyboard');
+  lang = localStorage.getItem('lang') || 'en';
 
-    const keys = new DocumentFragment();
+  init() {
+    this.elements.wrapper = createElement('div', 'wrapper');
+    this.elements.textarea = createElement('textarea', 'textarea');
+    this.elements.keyboard = createElement('div', 'keyboard');
+
+    const keysFragment = new DocumentFragment();
 
     buttons.forEach((button) => {
       const key = createElement('button', 'key');
+      key.setAttribute('type', 'button');
+
       switch (button.code) {
         case 'Backspace':
           key.classList.add('backspace');
@@ -115,13 +121,28 @@ class Keyboard {
           break;
       }
 
-      key.textContent = button[this.lang];
-      keys.append(key);
+      keysFragment.append(key);
     });
 
-    keyboard.append(keys);
-    wrapper.append(textarea, keyboard);
-    document.body.append(wrapper);
+    this.elements.keyboard.append(keysFragment);
+    this.elements.keys = this.elements.keyboard.querySelectorAll('.key');
+
+    this.fillButtonsNames(this.lang);
+
+    this.elements.wrapper.append(this.elements.textarea, this.elements.keyboard);
+    document.body.append(this.elements.wrapper);
+  }
+
+  changeLanguage() {
+    this.lang = (this.lang === 'en') ? 'ru' : 'en';
+    localStorage.setItem('lang', this.lang);
+    this.fillButtonsNames(this.lang);
+  }
+
+  fillButtonsNames(lang) {
+    for (let i = 0; i < this.elements.keys.length; i += 1) {
+      this.elements.keys[i].textContent = buttons[i][lang];
+    }
   }
 }
 
