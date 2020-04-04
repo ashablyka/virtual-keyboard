@@ -149,10 +149,15 @@ class Keyboard {
   }
 
   onKeyDown = (event) => {
+    event.preventDefault();
     const index = buttons.findIndex((button) => button.code === event.code);
     const buttonPressed = this.elements.keys[index];
 
     buttonPressed.classList.add('pressed');
+
+    if (event.shiftKey && event.altKey) {
+      this.changeLanguage();
+    }
   }
 
   onKeyUp = (event) => {
