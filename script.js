@@ -180,8 +180,7 @@ class Keyboard {
 
   onButtonAction(button) {
     if (button.printable) {
-      this.elements.textarea.value += button[this.lang];
-      this.elements.textarea.focus();
+      this.printLetter(button);
       return;
     }
 
@@ -192,18 +191,66 @@ class Keyboard {
       case 'Tab':
         this.onTab();
         break;
+      case 'Backspace':
+        this.onBackspace();
+        break;
+      case 'Delete':
+        this.onDelete();
+        break;
       default:
         break;
     }
     this.elements.textarea.focus();
   }
 
+  printLetter(button) {
+    const { value, selectionStart } = this.elements.textarea;
+
+    this.elements.textarea.value = value.slice(0, selectionStart)
+    + button[this.lang] + value.slice(selectionStart);
+
+    this.setCursorPosition(selectionStart + 1);
+    this.elements.textarea.focus();
+  }
+
   onEnter() {
-    this.elements.textarea.value += '\n';
+    const { value, selectionStart } = this.elements.textarea;
+
+    this.elements.textarea.value = `${value.slice(0, selectionStart)}\n${value.slice(selectionStart)}`;
+
+    this.setCursorPosition(selectionStart + 1);
   }
 
   onTab() {
-    this.elements.textarea.value += '\t';
+    const { value, selectionStart } = this.elements.textarea;
+
+    this.elements.textarea.value = `${value.slice(0, selectionStart)}\t${value.slice(selectionStart)}`;
+
+    this.setCursorPosition(selectionStart + 1);
+  }
+
+  onBackspace() {
+    const { value, selectionStart } = this.elements.textarea;
+    const newSelectionStart = selectionStart > 0 ? selectionStart - 1 : 0;
+
+    this.elements.textarea.value = value.slice(0, newSelectionStart)
+    + value.slice(selectionStart);
+
+    this.setCursorPosition(newSelectionStart);
+  }
+
+  onDelete() {
+    const { value, selectionStart } = this.elements.textarea;
+
+    this.elements.textarea.value = value.slice(0, selectionStart)
+    + value.slice(selectionStart + 1);
+
+    this.setCursorPosition(selectionStart);
+  }
+
+  setCursorPosition(position) {
+    this.elements.textarea.selectionStart = position;
+    this.elements.textarea.selectionEnd = position;
   }
 }
 
