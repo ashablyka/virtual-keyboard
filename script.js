@@ -156,7 +156,7 @@ class Keyboard {
 
     buttonPressed.classList.add('pressed');
 
-    this.printLetter(buttons[index]);
+    this.elements.keys[index].click();
 
     if (event.shiftKey && event.altKey) {
       this.changeLanguage();
@@ -174,14 +174,36 @@ class Keyboard {
     if (event.target.classList.contains('key')) {
       const index = Array.from(this.elements.keys).findIndex((key) => key === event.target);
 
-      this.printLetter(buttons[index]);
+      this.onButtonAction(buttons[index]);
     }
   }
 
-  printLetter(button) {
+  onButtonAction(button) {
     if (button.printable) {
       this.elements.textarea.value += button[this.lang];
+      this.elements.textarea.focus();
+      return;
     }
+
+    switch (button.code) {
+      case 'Enter':
+        this.onEnter();
+        break;
+      case 'Tab':
+        this.onTab();
+        break;
+      default:
+        break;
+    }
+    this.elements.textarea.focus();
+  }
+
+  onEnter() {
+    this.elements.textarea.value += '\n';
+  }
+
+  onTab() {
+    this.elements.textarea.value += '\t';
   }
 }
 
