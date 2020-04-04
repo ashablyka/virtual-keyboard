@@ -53,16 +53,16 @@ const buttons = [
   { code: 'Comma', en: ',', ru: 'б', printable: true },
   { code: 'Period', en: '.', ru: 'ю', printable: true },
   { code: 'Slash', en: '/', ru: '.', printable: true },
-  { code: 'ArrowUp', en: '▲', ru: '▲', printable: false },
+  { code: 'ArrowUp', en: '▲', ru: '▲', printable: true },
   { code: 'ShiftRight', en: 'Shift', ru: 'Shift', printable: false },
   { code: 'ControlLeft', en: 'Ctrl', ru: 'Ctrl', printable: false },
   { code: 'MetaLeft', en: 'Win', ru: 'Win', printable: false },
   { code: 'AltLeft', en: 'Alt', ru: 'Alt', printable: false },
   { code: 'Space', en: ' ', ru: ' ', printable: true },
   { code: 'AltRight', en: 'Alt', ru: 'Alt', printable: false },
-  { code: 'ArrowLeft', en: '◄', ru: '◄', printable: false },
-  { code: 'ArrowDown', en: '▼', ru: '▼', printable: false },
-  { code: 'ArrowRight', en: '►', ru: '►', printable: false },
+  { code: 'ArrowLeft', en: '◄', ru: '◄', printable: true },
+  { code: 'ArrowDown', en: '▼', ru: '▼', printable: true },
+  { code: 'ArrowRight', en: '►', ru: '►', printable: true },
   { code: 'ControlRight', en: 'Ctrl', ru: 'Ctrl', printable: false },
 ];
 class Keyboard {
@@ -134,6 +134,7 @@ class Keyboard {
 
     document.addEventListener('keydown', this.onKeyDown);
     document.addEventListener('keyup', this.onKeyUp);
+    document.addEventListener('click', this.onClick);
   }
 
   fillButtonsNames(lang) {
@@ -155,6 +156,8 @@ class Keyboard {
 
     buttonPressed.classList.add('pressed');
 
+    this.printLetter(buttons[index]);
+
     if (event.shiftKey && event.altKey) {
       this.changeLanguage();
     }
@@ -165,6 +168,20 @@ class Keyboard {
     const buttonPressed = this.elements.keys[index];
 
     buttonPressed.classList.remove('pressed');
+  }
+
+  onClick = (event) => {
+    if (event.target.classList.contains('key')) {
+      const index = Array.from(this.elements.keys).findIndex((key) => key === event.target);
+
+      this.printLetter(buttons[index]);
+    }
+  }
+
+  printLetter(button) {
+    if (button.printable) {
+      this.elements.textarea.value += button[this.lang];
+    }
   }
 }
 
