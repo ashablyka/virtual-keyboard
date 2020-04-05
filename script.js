@@ -65,6 +65,7 @@ const buttons = [
   { code: 'ArrowRight', en: '►', ru: '►', printable: true },
   { code: 'ControlRight', en: 'Ctrl', ru: 'Ctrl', printable: false },
 ];
+
 class Keyboard {
   elements = {
     wrapper: null,
@@ -84,51 +85,7 @@ class Keyboard {
     this.elements.textarea = createElement('textarea', 'textarea');
     this.elements.keyboard = createElement('div', 'keyboard');
 
-    const keysFragment = new DocumentFragment();
-
-    buttons.forEach((button) => {
-      const key = createElement('button', 'key');
-      key.setAttribute('type', 'button');
-
-      switch (button.code) {
-        case 'Backspace':
-          key.classList.add('backspace');
-          break;
-        case 'Tab':
-          key.classList.add('tab');
-          break;
-        case 'Delete':
-          key.classList.add('delete');
-          break;
-        case 'CapsLock':
-          key.classList.add('capslock');
-          break;
-        case 'Enter':
-          key.classList.add('enter');
-          break;
-        case 'ShiftLeft':
-          key.classList.add('left-shift');
-          break;
-        case 'ShiftRight':
-          key.classList.add('right-shift');
-          break;
-        case 'Space':
-          key.classList.add('space');
-          break;
-        case 'ArrowUp':
-        case 'ArrowLeft':
-        case 'ArrowDown':
-        case 'ArrowRight':
-          key.classList.add('arrow');
-          break;
-        default:
-          break;
-      }
-
-      keysFragment.append(key);
-    });
-
-    this.elements.keyboard.append(keysFragment);
+    this.elements.keyboard.append(createKeyElements());
     this.elements.keys = this.elements.keyboard.querySelectorAll('.key');
 
     this.fillButtonsNames();
@@ -178,6 +135,11 @@ class Keyboard {
   onKeyDown = (event) => {
     event.preventDefault();
     const index = buttons.findIndex((button) => button.code === event.code);
+
+    if (index === -1) {
+      return;
+    }
+
     const buttonPressed = this.elements.keys[index];
 
     buttonPressed.classList.add('pressed');
@@ -196,6 +158,11 @@ class Keyboard {
 
   onKeyUp = (event) => {
     const index = buttons.findIndex((button) => button.code === event.code);
+
+    if (index === -1) {
+      return;
+    }
+
     const buttonPressed = this.elements.keys[index];
 
     buttonPressed.classList.remove('pressed');
@@ -305,6 +272,54 @@ function createElement(tagName, ...classNames) {
   element.classList.add(...classNames);
 
   return element;
+}
+
+function createKeyElements() {
+  const keysFragment = new DocumentFragment();
+
+  buttons.forEach((button) => {
+    const key = createElement('button', 'key');
+    key.setAttribute('type', 'button');
+
+    switch (button.code) {
+      case 'Backspace':
+        key.classList.add('backspace');
+        break;
+      case 'Tab':
+        key.classList.add('tab');
+        break;
+      case 'Delete':
+        key.classList.add('delete');
+        break;
+      case 'CapsLock':
+        key.classList.add('capslock');
+        break;
+      case 'Enter':
+        key.classList.add('enter');
+        break;
+      case 'ShiftLeft':
+        key.classList.add('left-shift');
+        break;
+      case 'ShiftRight':
+        key.classList.add('right-shift');
+        break;
+      case 'Space':
+        key.classList.add('space');
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+      case 'ArrowDown':
+      case 'ArrowRight':
+        key.classList.add('arrow');
+        break;
+      default:
+        break;
+    }
+
+    keysFragment.append(key);
+  });
+
+  return keysFragment;
 }
 
 const keyboard = new Keyboard();
