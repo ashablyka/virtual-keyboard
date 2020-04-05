@@ -1,17 +1,17 @@
 const buttons = [
-  { code: 'Backquote', en: '`', ru: 'ё', printable: true },
-  { code: 'Digit1', en: '1', ru: '1', printable: true },
-  { code: 'Digit2', en: '2', ru: '2', printable: true },
-  { code: 'Digit3', en: '3', ru: '3', printable: true },
-  { code: 'Digit4', en: '4', ru: '4', printable: true },
-  { code: 'Digit5', en: '5', ru: '5', printable: true },
-  { code: 'Digit6', en: '6', ru: '6', printable: true },
-  { code: 'Digit7', en: '7', ru: '7', printable: true },
-  { code: 'Digit8', en: '8', ru: '8', printable: true },
-  { code: 'Digit9', en: '9', ru: '9', printable: true },
-  { code: 'Digit0', en: '0', ru: '0', printable: true },
-  { code: 'Minus', en: '-', ru: '-', printable: true },
-  { code: 'Equal', en: '=', ru: '=', printable: true },
+  { code: 'Backquote', en: '`', ru: 'ё', shift: { en: '`', ru: 'ё' }, printable: true },
+  { code: 'Digit1', en: '1', ru: '1', shift: { en: '!', ru: '!' }, printable: true },
+  { code: 'Digit2', en: '2', ru: '2', shift: { en: '@', ru: '"' }, printable: true },
+  { code: 'Digit3', en: '3', ru: '3', shift: { en: '#', ru: '№' }, printable: true },
+  { code: 'Digit4', en: '4', ru: '4', shift: { en: '$', ru: ';' }, printable: true },
+  { code: 'Digit5', en: '5', ru: '5', shift: { en: '%', ru: '%' }, printable: true },
+  { code: 'Digit6', en: '6', ru: '6', shift: { en: '^', ru: ':' }, printable: true },
+  { code: 'Digit7', en: '7', ru: '7', shift: { en: '&', ru: '?' }, printable: true },
+  { code: 'Digit8', en: '8', ru: '8', shift: { en: '*', ru: '*' }, printable: true },
+  { code: 'Digit9', en: '9', ru: '9', shift: { en: '(', ru: '(' }, printable: true },
+  { code: 'Digit0', en: '0', ru: '0', shift: { en: ')', ru: ')' }, printable: true },
+  { code: 'Minus', en: '-', ru: '-', shift: { en: '_', ru: '_' }, printable: true },
+  { code: 'Equal', en: '=', ru: '=', shift: { en: '+', ru: '+' }, printable: true },
   { code: 'Backspace', en: 'Backspace', ru: 'Backspace', printable: false },
   { code: 'Tab', en: 'Tab', ru: 'Tab', printable: false },
   { code: 'KeyQ', en: 'q', ru: 'й', printable: true },
@@ -24,9 +24,9 @@ const buttons = [
   { code: 'KeyI', en: 'i', ru: 'ш', printable: true },
   { code: 'KeyO', en: 'o', ru: 'щ', printable: true },
   { code: 'KeyP', en: 'p', ru: 'з', printable: true },
-  { code: 'BracketLeft', en: '[', ru: 'х', printable: true },
-  { code: 'BracketRight', en: ']', ru: 'ъ', printable: true },
-  { code: 'Backslash', en: '\\', ru: '\\', printable: true },
+  { code: 'BracketLeft', en: '[', ru: 'х', shift: { en: '{', ru: 'х' }, printable: true },
+  { code: 'BracketRight', en: ']', ru: 'ъ', shift: { en: '}', ru: 'ъ' }, printable: true },
+  { code: 'Backslash', en: '\\', ru: '\\', shift: { en: '|', ru: '/' }, printable: true },
   { code: 'Delete', en: 'DEL', ru: 'DEL', printable: false },
   { code: 'CapsLock', en: 'Caps Lock', ru: 'Caps Lock', printable: false },
   { code: 'KeyA', en: 'a', ru: 'ф', printable: true },
@@ -38,11 +38,11 @@ const buttons = [
   { code: 'KeyJ', en: 'j', ru: 'о', printable: true },
   { code: 'KeyK', en: 'k', ru: 'л', printable: true },
   { code: 'KeyL', en: 'l', ru: 'д', printable: true },
-  { code: 'Semicolon', en: ';', ru: 'ж', printable: true },
-  { code: 'Quote', en: '\'', ru: 'э', printable: true },
+  { code: 'Semicolon', en: ';', ru: 'ж', shift: { en: ':', ru: 'ж' }, printable: true },
+  { code: 'Quote', en: '\'', ru: 'э', shift: { en: '"', ru: 'э' }, printable: true },
   { code: 'Enter', en: 'Enter', ru: 'Enter', printable: false },
   { code: 'ShiftLeft', en: 'Shift', ru: 'Shift', printable: false },
-  { code: 'NoCode', en: '\\', ru: '\\', printable: true },
+  { code: 'IntlBackslash', en: '\\', ru: '\\', shift: { en: '|', ru: '/' }, printable: true },
   { code: 'KeyZ', en: 'z', ru: 'я', printable: true },
   { code: 'KeyX', en: 'x', ru: 'ч', printable: true },
   { code: 'KeyC', en: 'c', ru: 'с', printable: true },
@@ -50,9 +50,9 @@ const buttons = [
   { code: 'KeyB', en: 'b', ru: 'и', printable: true },
   { code: 'KeyN', en: 'n', ru: 'т', printable: true },
   { code: 'KeyM', en: 'm', ru: 'ь', printable: true },
-  { code: 'Comma', en: ',', ru: 'б', printable: true },
-  { code: 'Period', en: '.', ru: 'ю', printable: true },
-  { code: 'Slash', en: '/', ru: '.', printable: true },
+  { code: 'Comma', en: ',', ru: 'б', shift: { en: '<', ru: 'б' }, printable: true },
+  { code: 'Period', en: '.', ru: 'ю', shift: { en: '>', ru: 'ю' }, printable: true },
+  { code: 'Slash', en: '/', ru: '.', shift: { en: '?', ru: ',' }, printable: true },
   { code: 'ArrowUp', en: '▲', ru: '▲', printable: true },
   { code: 'ShiftRight', en: 'Shift', ru: 'Shift', printable: false },
   { code: 'ControlLeft', en: 'Ctrl', ru: 'Ctrl', printable: false },
@@ -74,6 +74,10 @@ class Keyboard {
   }
 
   lang = localStorage.getItem('lang') || 'en';
+
+  isCapsLock = false;
+
+  isShift = false;
 
   init() {
     this.elements.wrapper = createElement('div', 'wrapper');
@@ -127,7 +131,7 @@ class Keyboard {
     this.elements.keyboard.append(keysFragment);
     this.elements.keys = this.elements.keyboard.querySelectorAll('.key');
 
-    this.fillButtonsNames(this.lang);
+    this.fillButtonsNames();
 
     this.elements.wrapper.append(this.elements.textarea, this.elements.keyboard);
     document.body.append(this.elements.wrapper);
@@ -137,16 +141,38 @@ class Keyboard {
     document.addEventListener('click', this.onClick);
   }
 
-  fillButtonsNames(lang) {
+  fillButtonsNames() {
     this.elements.keys.forEach((key, index) => {
-      key.textContent = buttons[index][lang];
+      key.textContent = buttons[index][this.lang];
+
+      if (!this.isCapsLock && this.isShift) {
+        if (buttons[index].shift) {
+          key.textContent = buttons[index].shift[this.lang].toUpperCase();
+        } else if (buttons[index].printable) {
+          key.textContent = buttons[index][this.lang].toUpperCase();
+        }
+      }
+
+      if (this.isCapsLock && !this.isShift) {
+        if (buttons[index].printable) {
+          key.textContent = buttons[index][this.lang].toUpperCase();
+        }
+      }
+
+      if (this.isCapsLock && this.isShift) {
+        if (buttons[index].shift) {
+          key.textContent = buttons[index].shift[this.lang].toLowerCase();
+        } else if (buttons[index].printable) {
+          key.textContent = buttons[index][this.lang].toLowerCase();
+        }
+      }
     });
   }
 
   changeLanguage() {
     this.lang = (this.lang === 'en') ? 'ru' : 'en';
     localStorage.setItem('lang', this.lang);
-    this.fillButtonsNames(this.lang);
+    this.fillButtonsNames();
   }
 
   onKeyDown = (event) => {
@@ -161,6 +187,11 @@ class Keyboard {
     if (event.shiftKey && event.altKey) {
       this.changeLanguage();
     }
+
+    if (event.shiftKey && !event.altKey) {
+      this.isShift = true;
+      this.fillButtonsNames();
+    }
   }
 
   onKeyUp = (event) => {
@@ -168,6 +199,11 @@ class Keyboard {
     const buttonPressed = this.elements.keys[index];
 
     buttonPressed.classList.remove('pressed');
+
+    if ((event.code === 'ShiftLeft' || event.code === 'ShiftRight') && this.isShift) {
+      this.isShift = false;
+      this.fillButtonsNames();
+    }
   }
 
   onClick = (event) => {
@@ -197,20 +233,23 @@ class Keyboard {
       case 'Delete':
         this.onDelete();
         break;
+      case 'CapsLock':
+        this.onCapsLock();
+        break;
       default:
         break;
     }
-    this.elements.textarea.focus();
   }
 
   printLetter(button) {
     const { value, selectionStart } = this.elements.textarea;
+    const index = buttons.indexOf(button);
+    const letter = this.elements.keys[index].textContent;
 
     this.elements.textarea.value = value.slice(0, selectionStart)
-    + button[this.lang] + value.slice(selectionStart);
+      + letter + value.slice(selectionStart);
 
     this.setCursorPosition(selectionStart + 1);
-    this.elements.textarea.focus();
   }
 
   onEnter() {
@@ -234,7 +273,7 @@ class Keyboard {
     const newSelectionStart = selectionStart > 0 ? selectionStart - 1 : 0;
 
     this.elements.textarea.value = value.slice(0, newSelectionStart)
-    + value.slice(selectionStart);
+      + value.slice(selectionStart);
 
     this.setCursorPosition(newSelectionStart);
   }
@@ -243,7 +282,7 @@ class Keyboard {
     const { value, selectionStart } = this.elements.textarea;
 
     this.elements.textarea.value = value.slice(0, selectionStart)
-    + value.slice(selectionStart + 1);
+      + value.slice(selectionStart + 1);
 
     this.setCursorPosition(selectionStart);
   }
@@ -251,6 +290,12 @@ class Keyboard {
   setCursorPosition(position) {
     this.elements.textarea.selectionStart = position;
     this.elements.textarea.selectionEnd = position;
+    this.elements.textarea.focus();
+  }
+
+  onCapsLock() {
+    this.isCapsLock = !this.isCapsLock;
+    this.fillButtonsNames();
   }
 }
 
