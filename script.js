@@ -71,6 +71,7 @@ class Keyboard {
     wrapper: null,
     textarea: null,
     keyboard: null,
+    info: null,
     keys: [],
   }
 
@@ -84,13 +85,18 @@ class Keyboard {
     this.elements.wrapper = createElement('div', 'wrapper');
     this.elements.textarea = createElement('textarea', 'textarea');
     this.elements.keyboard = createElement('div', 'keyboard');
+    this.elements.info = createElement('p', 'info');
+
+    this.elements.info.innerHTML = `Language switch shortcut: <span class="shortcut">Alt + Shift</span>
+    <br>Developed in Windows OS`;
 
     this.elements.keyboard.append(createKeyElements());
     this.elements.keys = this.elements.keyboard.querySelectorAll('.key');
 
     this.fillButtonsNames();
 
-    this.elements.wrapper.append(this.elements.textarea, this.elements.keyboard);
+    this.elements.wrapper.append(this.elements.textarea,
+      this.elements.keyboard, this.elements.info);
     document.body.append(this.elements.wrapper);
 
     document.addEventListener('keydown', this.onKeyDown);
@@ -322,6 +328,8 @@ function createKeyElements() {
   return keysFragment;
 }
 
-const keyboard = new Keyboard();
+window.addEventListener('load', () => {
+  const keyboard = new Keyboard();
 
-keyboard.init();
+  keyboard.init();
+});
