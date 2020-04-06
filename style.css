@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #808080;
+}
+
+.wrapper {
+  width: 771px;
+  padding: 10px;
+  margin: 50px auto;
+}
+
+.textarea {
+  width: 751px;
+  height: 100px;
+  margin-bottom: 50px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.keyboard {
+  width: 751px;
+  display: flex;
+  flex-wrap: wrap;
+  background: linear-gradient(#3b3b3b, #070707);;
+  border-radius: 5px;
+  margin-bottom: 50px;
+  padding: 15px 10px;
+}
+
+.key {
+  width: 44px;
+  height: 49px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background: linear-gradient(#3b3b3b, #070707);
+  color: #ebebeb;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  line-height: 45px;
+  border: 2px solid #808080;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px #000000;
+  outline: 0;
+  user-select: none;
+}
+
+.key:last-child {
+  margin-right: 0;
+}
+
+.key:hover {
+  background: linear-gradient(#878686, #505050);
+  cursor: pointer;
+}
+
+.backspace {
+  width: 114px;
+  margin-right: 0;
+}
+
+.tab {
+  width: 56px;
+}
+
+.delete {
+  width: 53px;
+  margin-right: 0;
+}
+
+.capslock {
+  width: 86px;
+}
+
+.enter {
+  width: 121px;
+  margin-right: 0;
+}
+
+.left-shift {
+  width: 65px;
+}
+
+.right-shift {
+  width: 93px;
+  margin-right: 0;
+}
+
+.space {
+  width: 359px;
+}
+
+.arrow {
+  font-size: 10px;
+}
+
+.pressed {
+  background: linear-gradient(#878686, #505050);
+  transform: translate(1px, 1px);
+  transition: all 0.2s ease 0s;
+}
+
+.info {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 16px;
+  line-height: 3;
+}
+
+.shortcut {
+  color: #ececec;
+  background: linear-gradient(rgb(83, 83, 83), #2a2a2a);
+  border-radius: 5px;
+  padding: 8px;
+  font-family: 'Courier New', Courier, monospace;
+}
